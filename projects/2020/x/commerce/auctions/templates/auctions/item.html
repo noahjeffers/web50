@@ -1,0 +1,62 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %} 
+
+
+    {% if user.is_authenticated %}
+        {% if user in watching %}
+            <a href="{% url 'remove' item.id %}">Remove from Watchlist</a>
+        {% else %}
+            <a href="{% url 'watch' item.id %}">Add to Watchlist</a>
+        {% endif %}
+    {% endif %}
+    <h2>Listing: {{ item.title }}</h2>
+    {% if item.imageLink != '' %}
+        <img style="width: 200px; height: 200px;" src="{{ item.imageLink }}" alt="{{ item.title }}">
+    {% endif %}
+    <p>{{ item.description }}</p>
+    <h3>Current Bid: ${{ item.currentbid.amount }}</h3>
+
+    <h4>Details</h4>
+    <ul>
+        <li>Listed by: {{ item.listedBy.username }}</li>
+        <li>Category: {{ item.category.title }}</li>
+    </ul>
+    {% if item.active == True %}
+    <form action="{% url 'bid' item.id %}" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <input autofocus class="form-control" type="text" name="amount" >
+        </div>
+        <input class="btn btn-primary" type="submit" value="Bid">
+    </form>
+    {% endif %}
+
+
+    {% if item.active == False and item.currentbid.userID.id == user.id %}
+    <h2>You have won this auction</h2>
+    {% endif %}
+
+    {% if user == item.listedBy %}
+        <a href="{% url 'close' item.id %}">Close auction</a>
+    {% endif %}
+
+    <div class="row" style="background-color:#333;">
+        <div class="col-3">
+            <h3 style="color: rgb(241, 241, 241); margin: 10px;">Comments</h3>
+            <form action="{% url 'comment' item.id %}" method="POST">
+                {% csrf_token %}
+                <textarea style="margin: 10px;" name="content" id="content" cols="22" rows="6"></textarea><br>
+                <input style="margin: 10px;" type="submit" name="postcomment" id="postcomment" value="Post Comment">
+            </form>    
+        </div>
+        <div class="col-6">
+            {% for comment in comments %}
+                <div style="background-color:rgb(241, 241, 241); margin:5px;">
+                    <span>{{ comment.content }}</span>
+                    <p style="text-align: right;">{{ comment.userID.username }}</p>                    
+                </div>
+            {% endfor %}
+        </div >
+    </div>
+{% endblock %}

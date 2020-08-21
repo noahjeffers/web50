@@ -1,0 +1,29 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+
+    <div>
+        {% for listing in listings %}
+              <div class="card flex-row flex-wrap">
+                <div class="card-header border-0">                    
+                    {% if listing.imageLink == ''%}
+                        <img src="//placehold.it/200" alt="no image">
+                    {% else %}
+                        <img style="width: 200px; height: 200px;" src="{{listing.imageLink}}" alt="{{ listing.title }}">
+                    {% endif %}
+                </div>
+                <div class="card-block px-2">
+                    <a href="{% url 'item' listing.id %}"><h4 class="card-title">{{ listing.title }}</h4></a>
+                    <p class="card-text">{{ listing.description }}</p>
+                    <p class="card-text">Current Bid: $ {{ listing.currentbid.amount }}</p>
+                    <p class="card-text">{{ listing.uploadDate }}</p>
+                </div>
+                <div class="w-100"></div>
+                <div class="card-footer w-100 text-muted">
+                    <small>Category: {{ listing.category.title }}</small>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Advanced Search</title>
+        <link rel="stylesheet" href="styles.css" type="text/css">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"> 
+    </head>
+    <body>
+
+      <div class="advanced">
+        <div class="header">
+          <img id="advanced_google" src="images/google.png" alt="Google">
+        </div>
+        <div id="adv_links">
+          <a id="home" href="index.html">Search</a>
+        </div>
+        <div id="adv">
+          <label id="label">Advanced Search</label>
+        </div>        
+      </div>
+      <div id="adv_search">
+        <p id="find">Find pages with...</p>
+        <form action="https://google.com/search">         
+
+            <label id="l_allwords" for="allwords">all these words:</label>
+            <input id="allwords" type="text" name="as_q" value=""><br>
+
+            <label id="l_exact" for="exact">this exact word or phrase:</label>
+            <input id="exact" type="text" name="as_epq" value=""><br>
+
+            <label id="l_any" for="any">any of these words:</label>
+            <input id="any" type="text" name="as_oq" value=""><br>
+
+            <label id="l_none" for="none">none of these words:</label>
+            <input id="none" type="text" name="as_eq" value=""><br>
+
+            <input id="adv_btn" type="submit" value="Advanced Search">
+          </form>
+      </div>
+    </body>
+</html>

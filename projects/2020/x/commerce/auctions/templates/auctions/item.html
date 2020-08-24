@@ -37,7 +37,7 @@
     <h2>You have won this auction</h2>
     {% endif %}
 
-    {% if user == item.listedBy %}
+    {% if user == item.listedBy and item.active == True %}
         <a href="{% url 'close' item.id %}">Close auction</a>
     {% endif %}
 

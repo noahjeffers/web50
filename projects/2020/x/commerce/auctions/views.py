@@ -131,9 +131,6 @@ def close(request,item_id):
     item = Listing.objects.get(pk=item_id)
     item.active = False
     item.save()
-    return render(request, "auctions/error.html",{
-        "error":item.active
-    })
     return redirect('/'+str(item_id))
 
 def error(request):
@@ -177,7 +174,7 @@ def bid(request,item_id):
 def closed(request):
     inactive_listings = Listing.objects.filter(active=False)
 
-    return render(request, "auctions/index.html", {
+    return render(request, "auctions/closed.html", {
         "listings": inactive_listings,
         "bids": Bids.objects.all()
     })

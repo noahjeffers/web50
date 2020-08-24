@@ -17,7 +17,7 @@
                     <a href="{% url 'item' listing.id %}"><h4 class="card-title">{{ listing.title }}</h4></a>
                     <p class="card-text">{{ listing.description }}</p>
                     <p class="card-text">Current Bid: $ {{ listing.currentbid.amount }}</p>
-                    <p class="card-text">{{ listing.uploadDate }}</p>
+                    <p class="card-text">Listed on: {{ listing.uploadDate }}</p>
                 </div>
                 <div class="w-100"></div>
                 <div class="card-footer w-100 text-muted">
